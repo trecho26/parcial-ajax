@@ -243,6 +243,7 @@ function eliminarTarea(tarea) {
   var datos = new FormData();
   datos.append("id", id);
   datos.append("accion", "eliminarTarea");
+  datos.append("estado", 0);
 
   //Abrir la conexion;
   xhr.open("POST", "funciones/funciones-tareas.php", true);
@@ -250,8 +251,8 @@ function eliminarTarea(tarea) {
   //Onload
   xhr.onload = function() {
     if (this.readyState === 4 && this.status === 200) {
-      //var response = JSON.parse(xhr.responseText);
-      //console.log(response);
+      var response = xhr.responseText;
+      console.log(response);
 
       //Comprobar que haya tareas restantes
       var listaTareasRestantes = document.querySelectorAll("li.tarea");
