@@ -254,14 +254,13 @@ function eliminarTarea(tarea) {
       var response = xhr.responseText;
       console.log(response);
     }
-  };
-
-  //Comprobar que haya tareas restantes
-  var listaTareasRestantes = document.querySelectorAll("li.tarea");
-  if (listaTareasRestantes.length === 0) {
-    document.querySelector(".list-group").innerHTML = `
+    //Comprobar que haya tareas restantes
+    var listaTareasRestantes = document.querySelectorAll("li.tarea");
+    if (listaTareasRestantes.length === 0) {
+      document.querySelector(".list-group").innerHTML = `
         <h3 class="text-center lista-vacia" style="color: #5148a5;">No hay tareas</h3>`;
-  }
+    }
+  };
 
   //Enviar la peticion
   xhr.send(datos);
