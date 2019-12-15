@@ -1,8 +1,8 @@
 <?php
 
-$id = (int) $_POST['id'];
+$id = $_POST['id'];
 $accion = $_POST['accion'];
-$estado = (int) $_POST['estado'];
+$estado = $_POST['estado'];
 
 if ($accion === 'cambiarEstado') {
     include 'conexion.php';
@@ -16,7 +16,7 @@ if ($accion === 'cambiarEstado') {
             );
         } else {
             $respuesta = array(
-                'respuesta'=>'error'
+                'respuesta'=>'error cambiarEstado'
             );
         }
         $stmt->close();
@@ -38,7 +38,7 @@ if ($accion === 'cambiarEstado') {
             );
         } else {
             $respuesta = array(
-                'respuesta'=>'error'
+                'respuesta'=>'error eliminarTarea'
             );
         }
         $stmt->close();

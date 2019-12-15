@@ -32,8 +32,6 @@ function eventListeners() {
 
   //Eventos para las acciones de las tareas
   document.querySelector(".tareas").addEventListener("click", accionesTareas);
-
-  //Agregar el metodo editar
 }
 
 function validarRegistro(e) {
@@ -84,10 +82,11 @@ function validarRegistro(e) {
           }
           var nuevaTarea = document.createElement("li");
           nuevaTarea.classList = "list-group-item d-flex animated fadeIn tarea";
+          nuevaTarea.id = response.id_insertado;
           nuevaTarea.innerHTML = `
-            <span class="flex-grow-1">${response.tarea}</span>
+            <span class="flex-grow-1" id="${response.id_insertado}">${response.tarea}</span>
             <span><i class="fas fa-check"></i></span>
-            <span><i class="fas fa-pen" data-toggle="modal" data-target="#exampleModalCenter" onClick="agregarEdit('${nombre_tarea.value}','${descripcion.value}','${urgencia.value}')"></i></span>
+            <span><i class="fas fa-pen" data-toggle="modal" data-target="#exampleModalCenter" onClick="agregarEdit('${nombre_tarea.value}','${descripcion.value}','${urgencia.value}', '${response.id_insertado}')"></i></span>
             <span><i class="fas fa-trash"></i></span>
           `;
           var listaTareas = document.querySelector("#listado-tareas");
@@ -151,7 +150,7 @@ function accionesTareas(e) {
 //Cambiar el estado de la tarea
 function cambiarEstadoTarea(tarea, estado) {
   var id = tarea.parentElement.parentElement.id;
-
+  console.log(id);
   //Crear el llamado Ajax
   var xhr = new XMLHttpRequest();
 
@@ -236,6 +235,7 @@ function editarTarea(tarea) {
 //Eliminar tarea de la BD
 function eliminarTarea(tarea) {
   var id = tarea.id;
+  console.log(id);
   //Crear el llamado Ajax
   var xhr = new XMLHttpRequest();
 
@@ -253,15 +253,15 @@ function eliminarTarea(tarea) {
     if (this.readyState === 4 && this.status === 200) {
       var response = xhr.responseText;
       console.log(response);
-
-      //Comprobar que haya tareas restantes
-      var listaTareasRestantes = document.querySelectorAll("li.tarea");
-      if (listaTareasRestantes.length === 0) {
-        document.querySelector(".list-group").innerHTML = `
-        <h3 class="text-center lista-vacia" style="color: #5148a5;">No hay tareas</h3>`;
-      }
     }
   };
+
+  //Comprobar que haya tareas restantes
+  var listaTareasRestantes = document.querySelectorAll("li.tarea");
+  if (listaTareasRestantes.length === 0) {
+    document.querySelector(".list-group").innerHTML = `
+        <h3 class="text-center lista-vacia" style="color: #5148a5;">No hay tareas</h3>`;
+  }
 
   //Enviar la peticion
   xhr.send(datos);
