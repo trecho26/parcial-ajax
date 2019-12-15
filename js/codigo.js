@@ -86,7 +86,7 @@ function validarRegistro(e) {
           nuevaTarea.innerHTML = `
             <span class="flex-grow-1" id="${response.id_insertado}">${response.tarea}</span>
             <span><i class="fas fa-check"></i></span>
-            <span><i class="fas fa-pen" data-toggle="modal" data-target="#exampleModalCenter" onClick="agregarEdit('${nombre_tarea.value}','${descripcion.value}','${urgencia.value}', '${response.id_insertado}')"></i></span>
+            <span><i class="fas fa-pen" id="i${response.id_insertado}" data-toggle="modal" data-target="#exampleModalCenter" onClick="agregarEdit('${nombre_tarea.value}','${descripcion.value}','${urgencia.value}', '${response.id_insertado}')"></i></span>
             <span><i class="fas fa-trash"></i></span>
           `;
           var listaTareas = document.querySelector("#listado-tareas");
